@@ -3,6 +3,7 @@ package istio
 import (
 	"context"
 
+	accessv1alpha3 "github.com/servicemeshinterface/smi-controller-sdk/apis/access/v1alpha3"
 	splitv1alpha4 "github.com/servicemeshinterface/smi-controller-sdk/apis/split/v1alpha4"
 	"github.com/stretchr/testify/mock"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -21,6 +22,16 @@ func (mc *MockClient) CreateVirtualService(ctx context.Context, r client.Writer,
 
 func (mc *MockClient) DeleteVirtualService(ctx context.Context, r client.Writer, ts *splitv1alpha4.TrafficSplit) error {
 	args := mc.Called(ctx, r, ts)
+	return args.Error(0)
+}
+
+func (mc *MockClient) CreateAuthorizationPolicy(ctx context.Context, r client.Writer, tt *accessv1alpha3.TrafficTarget) error {
+	args := mc.Called(ctx, r, tt)
+	return args.Error(0)
+}
+
+func (mc *MockClient) DeleteAuthorizationPolicy(ctx context.Context, r client.Writer, tt *accessv1alpha3.TrafficTarget) error {
+	args := mc.Called(ctx, r, tt)
 	return args.Error(0)
 }
 

@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/go-logr/logr"
-	accessv1alpha3 "github.com/servicemeshinterface/smi-controller-sdk/apis/access/v1alpha3"
 	specsv1alpha4 "github.com/servicemeshinterface/smi-controller-sdk/apis/specs/v1alpha4"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -16,30 +15,6 @@ type API struct {
 
 func New(c Client) *API {
 	return &API{c}
-}
-
-func (l *API) UpsertTrafficTarget(
-	ctx context.Context,
-	c client.Client,
-	log logr.Logger,
-	tt *accessv1alpha3.TrafficTarget,
-) (ctrl.Result, error) {
-
-	log.Info("UpsertTrafficTarget called", "api", "v1alpha3", "target", tt)
-
-	return ctrl.Result{}, nil
-}
-
-func (l *API) DeleteTrafficTarget(
-	ctx context.Context,
-	c client.Client,
-	log logr.Logger,
-	tt *accessv1alpha3.TrafficTarget,
-) (ctrl.Result, error) {
-
-	log.Info("DeleteTrafficTarget called", "api", "v1alpha3", "target", tt)
-
-	return ctrl.Result{}, nil
 }
 
 func (l *API) UpsertHTTPRouteGroup(
